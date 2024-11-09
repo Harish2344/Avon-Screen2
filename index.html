@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Will Update</title>
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background: url('https://i.makeagif.com/media/12-12-2022/OJ7iej.gif') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, #08a7c4, #4109a8);
+            color: #fff;
+            padding: 15px;
+            margin-left: 20px;
+            
+            margin-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .sidebar .profile img {
+            border-radius: 0%;
+            width: 140px;
+            height: 160px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar .profile h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .sidebar .doc-status p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .sidebar .back-home {
+            margin-top: 37pc;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #03657e, #088d08);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar .back-home:hover {
+            background: linear-gradient(135deg, #04283d, #db08bf);
+        }
+
+        .main-content {
+            margin-left: 270px;
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        .navbar {
+            background-color: #fff;
+            padding: 30px 40px;
+            width: 113%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #004b8d;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #005b96;
+        }
+
+        .navbar .nav-tabs {
+            display: flex;
+            gap: 25px;
+        }
+       
+        .navbar .tab {
+            padding: 20px 25px;
+            background-color: #e9f4ff;
+            color: #005b96;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .tab:hover {
+            background-color: #cce7ff;
+            transform: translateY(-2px);
+        }
+
+        .navbar .tab.active {
+            background: linear-gradient(135deg, #326a8a, #db08bf);
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .navbar .tab .icon {
+            margin-right: 8px;
+        }
+
+        .navbar .tab .badge {
+            background-color: #ff4d4d;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 12px;
+        }
+
+        .navbar .user-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar .search-bar {
+            padding: 8px 15px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: width 0.3s, border-color 0.3s;
+            width: 200px;
+            font-size: 14px;
+        }
+
+        .navbar .search-bar:focus {
+            width: 300px;
+            border-color: #005b96;
+        }
+
+        .navbar .icon {
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .navbar .icon:hover {
+            color: #005b96;
+        }
+
+        .beneficiary-list table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        
+
+        .status {
+            padding: 5px 12px;
+            border-radius: 12px;
+            display: inline-block;
+            font-size: 12px;
+        }
+
+        .status.active {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .status.inactive {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .form-actions button {
+            padding: 8px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            background: linear-gradient(135deg, #03657e, #088d08);
+            transition: background-color 0.3s;
+        }
+
+        .form-actions button:hover {
+            background: linear-gradient(135deg, #03657e, #15088d);
+        }
+
+        .form-actions button.cancel {
+            background: linear-gradient(135deg, #5da136, #088d08);
+        }
+
+        .form-actions button.cancel:hover {
+            background-color: #da0808;
+        }
+        
+
+
+
+
+   .beneficiary-list table {
+    width: 89%;
+    border-collapse: collapse;
+    margin-top: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.beneficiary-list th, .beneficiary-list td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+    background-color: #f9f9f9;
+}
+
+.beneficiary-list th {
+    background: linear-gradient(135deg, #074a81, #08c2db);
+    color: #fff;
+}
+
+
+.add-beneficiary {
+    background-color: #ffffff;
+    
+    padding-left: 40px;
+    padding-right: 150px;
+    padding-bottom: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-left:-160px;
+    margin-top: 170px;
+}
+
+.add-beneficiary h2 {
+    color: #005b96;
+    margin-bottom: 20px;
+}
+
+.add-beneficiary form label {
+    display: block;
+    margin-top: 10px;
+    margin-right:50px;
+    font-size: 16px;
+    
+    color: #333;
+}
+
+.add-beneficiary form input {
+    width: 160%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 91, 150, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 91, 150, 0.5);
+    }
+}
+
+@keyframes rotate360 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.sidebar {
+    animation: slideInLeft 1.2s ease-out;
+    transition: transform 0.3s, background-color 0.3s;
+}
+.sidebar:hover {
+    transform: translateY(-5px);
+    background-color: #06b4d3;
+}
+
+
+.navbar .tab {
+    transition: transform 0.4s, background-color 0.3s, box-shadow 0.4s;
+}
+.navbar .tab:hover {
+    transform: scale(1.08) rotate(-2deg);
+    background-color: #9bcff5;
+    box-shadow: 0 5px 15px rgba(0, 91, 150, 0.3);
+}
+
+
+.badge {
+    animation: pulse 2s infinite, rotate360 5s infinite linear;
+}
+
+
+.add-beneficiary form input:focus {
+    border-color: #005b96;
+    box-shadow: 0 0 12px rgba(0, 91, 150, 0.4);
+    outline: none;
+    animation: glow 1.5s infinite alternate;
+}
+
+
+.sidebar .back-home,
+.form-actions button {
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+.sidebar .back-home:hover,
+.form-actions button:hover {
+    background-color: #03293d;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px) scale(1.02);
+}
+
+
+.beneficiary-list table tbody tr {
+    animation: fadeIn 0.8s ease-in;
+}
+.beneficiary-list table tbody tr:hover {
+    background-color: #e0f7ff;
+    animation: bounceIn 0.5s;
+}
+
+
+.form-actions button:active {
+    transform: scale(0.98);
+    background-color: #024b63;
+}
+
+@keyframes slideUpFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.add-beneficiary {
+    animation: slideUpFadeIn 1s ease-out;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+
+.add-beneficiary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 91, 150, 0.2);
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="picture1.png" alt="Profile Image">
+                <h2>HARISH</h2>
+            </div>
+            <div class="doc-status">
+                <p><strong>D.O.C:</strong> 04.12.1998</p>
+                <p><strong>Status:</strong> Complete</p>
+            </div>
+           <button class="back-home">Back Home</button>
+        </aside>
+
+        <main class="main-content">
+            <header class="navbar">
+                <div class="logo">my-will</div>
+                <div class="nav-tabs">
+                    <div class="tab active">
+                        <span class="icon">👤</span> ADD Beneficiaries
+                        <span class="badge">4</span>
+                    </div>
+                    <div class="tab">
+                        <span class="icon">🏠</span> ADD Asset
+                    </div>
+                    <div class="tab">
+                        <span class="icon">💼</span> ADD Liability
+                    </div>
+                    <div class="tab">
+                        <span class="icon">🔗</span> CREATE Links
+                    </div>
+                    <div class="tab">
+                        <span class="icon">✍️</span> ADD Signatories
+                    </div>
+                    <div class="tab">
+                        <span class="icon">📄</span> Will Generation
+                    </div>
+                </div>
+                <div class="user-controls">
+                    <input type="text" placeholder="Search" class="search-bar">
+                    <span class="icon">🔔</span>
+                    <span class="icon">👤</span>
+                </div>
+            </header>
+            <div class="beneficiary-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S. No</th>
+                            <th>Name</th>
+                            <th>Relationship</th>
+                            <th>Date of Birth</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" checked></td>
+                            <td>Harish</td>
+                            <td>Sister</td>
+                            <td>04/10/1988</td>
+                            <td><span class="status active">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" checked></td>
+                            <td>Lim</td>
+                            <td>Sister</td>
+                            <td>04/10/1988</td>
+                            <td><span class="status active">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" check></td>
+                            <td>jack</td>
+                            <td>Brother</td>
+                            <td>04/10/1988</td>
+                            <td><span class="status inactive">Inactive</span></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" checked></td>
+                            <td>Rose</td>
+                            <td>Sister</td>
+                            <td>04/10/1988</td>
+                            <td><span class="status active">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" checked></td>
+                            <td>Elizabeth</td>
+                            <td>Sister</td>
+                            <td>04/10/1988</td>
+                            <td><span class="status active">Active</span></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <section class="add-beneficiary">
+            <h2>Add New Beneficiary</h2>
+            <form>
+                <label for="title">Title*</label>
+                <input type="text" id="title" name="title">
+                <label for="first-name">First Name*</label>
+                <input type="text" id="first-name" name="first-name">
+                <label for="middle-name">Middle Name</label>
+                <input type="text" id="middle-name" name="middle-name">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last-name">
+                <label for="gender">Gender*</label>
+                <input type="text" id="gender" name="gender">
+                <label for="dob">Date of Birth*</label>
+                <input type="date" id="dob" name="dob">
+                <label for="religion">Religion*</label>
+                <input type="text" id="religion" name="religion">
+                <label for="father-name">Father Name*</label>
+                <input type="text" id="father-name" name="father-name">
+                <label for="mother-name">Mother Name*</label>
+                <input type="text" id="mother-name" name="mother-name">
+                <div class="form-actions">
+                    <button type="button">Cancel</button>
+                    <button type="submit">Update</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
